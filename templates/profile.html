@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %} {{ user.login }}- Profile {% endblock %}
+{% block content %}
+     <img class="profile-rounded" src="http://{{ request.META.HTTP_HOST }}/pic/{{ user.profile_picture }}" width="200px" alt="Logo img">
+{#    -------------------------------------------^tak chyba nie można ale to sie sprawdzi potem#}
+    <h2>{{ user.login }}</h2>
+     <form method="POST" enctype="multipart/form-data" action="."> {% csrf_token %}
+            {{ form }}
+    <input type='submit' value='Submit' class='btn btn-default'>
+    <h2 class="username">{{ user.name }}</h2>
+    <h2>Stats</h2>
+    <table>
+        <tr>
+            <td>Number of solved riddles :</td>
+            <td>{{ user.solved_riddles.count  }}</td>
+        </tr>
+        <tr>
+            <td>Points</td>
+            <td>{{ user.experience }}</td>
+        </tr>
+        <tr>
+            <td>Ranking place</td>
+            <td>{{ user.ranking }}</td>
+        </tr>
+    <tr>
+            <td>Level</td>
+            <td>{{ user.lvl }}</td>
+        </tr>
+    </table>
+
+{% endblock %}
